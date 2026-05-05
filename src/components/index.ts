@@ -1,6 +1,5 @@
 // auth
 
-
 // global
 import { Icons } from "./global/icons";
 import MaxWidthWrapper from "./global/max-width-wrapper";
@@ -14,28 +13,19 @@ import Providers from "./providers/providers";
 
 // dashboard
 
-
 // pricing
-import PricingCards from "./pricing-cards";
+import PricingCards from "./pricing/pricing-cards";
 
 // blog
 import Blogs from "./blog/blogs";
 
-
 export {
-
-
-    Icons,
-    MaxWidthWrapper,
-    AnimationContainer,
-    Navbar,
-    Footer,
-
-    Providers,
-
-
-
-    PricingCards,
-
-    Blogs,
+  Icons,
+  MaxWidthWrapper,
+  AnimationContainer,
+  Navbar,
+  Footer,
+  Providers,
+  PricingCards,
+  Blogs,
 };

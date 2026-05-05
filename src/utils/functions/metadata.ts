@@ -1,48 +1,93 @@
 import { Metadata } from "next";
 
 export const generateMetadata = ({
-    title = `${process.env.NEXT_PUBLIC_APP_NAME} - The Link Management Platform for Businesses`,
-    description = `${process.env.NEXT_PUBLIC_APP_NAME} is the link management platform for businesses. It helps you build, brand, and track your links.`,
-    image = "/thumbnail.png",
-    icons = [
-        {
-            rel: "apple-touch-icon",
-            sizes: "32x32",
-            url: "/apple-touch-icon.png"
-        },
-        {
-            rel: "icon",
-            sizes: "32x32",
-            url: "/favicon-32x32.png"
-        },
-        {
-            rel: "icon",
-            sizes: "16x16",
-            url: "/favicon-16x16.png"
-        },
-    ],
-    noIndex = false
+  title = "Rentline | Modern Property Management",
+  description = "Manage properties, tenants, payments, and maintenance in one powerful platform. Built for modern landlords.",
+  image = "/dashboard_link_preview.png",
+  noIndex = false,
 }: {
-    title?: string;
-    description?: string;
-    image?: string | null;
-    icons?: Metadata["icons"];
-    noIndex?: boolean;
-} = {}): Metadata => ({
+  title?: string;
+  description?: string;
+  image?: string | null;
+  noIndex?: boolean;
+} = {}): Metadata => {
+  const baseUrl = "https://rentline.io";
+
+  return {
+    metadataBase: new URL(baseUrl),
+
     title,
     description,
-    icons,
+
+    keywords: [
+      "property management",
+      "landlord software",
+      "tenant management",
+      "rent collection",
+      "real estate SaaS",
+    ],
+
+    alternates: {
+      canonical: baseUrl,
+    },
+
+    themeColor: "#7c3aed",
+
+    icons: {
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png" },
+      ],
+      other: [
+        {
+          rel: "manifest",
+          url: "/site.webmanifest",
+        },
+        {
+          rel: "icon",
+          url: "/android-chrome-192x192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          rel: "icon",
+          url: "/android-chrome-512x512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
+    },
+
     openGraph: {
-        title,
-        description,
-        ...(image && { images: [{ url: image }] }),
+      type: "website",
+      url: baseUrl,
+      title,
+      description,
+      images: image
+        ? [
+            {
+              url: image,
+              width: 1200,
+              height: 630,
+            },
+          ]
+        : [],
     },
+
     twitter: {
-        title,
-        description,
-        ...(image && { card: "summary_large_image", images: [image] }),
-        creator: "@shreyassihasane",
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : [],
+      creator: "Daniel Kruger",
     },
-    // metadataBase: new URL(process.env.APP_DOMAIN!),
-    ...(noIndex && { robots: { index: false, follow: false } }),
-});
+
+    robots: noIndex
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
+  };
+};

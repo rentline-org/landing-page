@@ -19,11 +19,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const MobileNavbar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const handleClose = () => setIsOpen(false);
 
   return (
     <div className="flex lg:hidden items-center justify-end">
@@ -33,72 +31,96 @@ const MobileNavbar = () => {
             <Menu className="w-5 h-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="w-screen">
-          <SheetClose
-            asChild
-            className="absolute top-3 right-5 bg-background z-20 flex items-center justify-center"
-          >
-            <Button size="icon" variant="ghost" className="text-neutral-600">
-              <X className="w-5 h-5" />
-            </Button>
-          </SheetClose>
-          <div className="flex flex-col items-start w-full py-2 mt-10">
-            <div className="flex items-center justify-evenly w-full space-x-2">
+
+        <SheetContent
+          side="right"
+          className="w-full sm:max-w-sm px-0 pt-12 border-l bg-background/95 backdrop-blur-xl"
+        >
+          {/* Header */}
+          {/* <div className="flex items-center justify-between px-5 py-4 border-b">
+            <span className="font-semibold text-base">Menu</span>
+
+            <SheetClose asChild>
+              <Button size="icon" variant="ghost">
+                <X className="w-5 h-5" />
+              </Button>
+            </SheetClose>
+          </div> */}
+
+          {/* Content */}
+          <div className="flex flex-col h-full overflow-y-auto px-4 py-6">
+            {/* Auth buttons */}
+            <div className="flex flex-col gap-3 mb-6">
               <Link
                 href="/"
+                onClick={handleClose}
                 className={buttonVariants({
-                  variant: "outline",
+                  variant: "default",
+                  size: "lg",
+                  className: "w-full",
+                })}
+              >
+                Get Started
+              </Link>
+
+              <Link
+                href="/"
+                onClick={handleClose}
+                className={buttonVariants({
+                  variant: "ghost",
+                  size: "lg",
                   className: "w-full",
                 })}
               >
                 Sign In
               </Link>
-              <Link
-                href="/"
-                className={buttonVariants({ className: "w-full" })}
-              >
-                Sign Up
-              </Link>
             </div>
-            <ul className="flex flex-col items-start w-full mt-6">
-              <Accordion type="single" collapsible className="!w-full">
-                {NAV_LINKS.map((link) => (
-                  <AccordionItem
-                    key={link.title}
-                    value={link.title}
-                    className="last:border-none"
-                  >
-                    {link.menu ? (
-                      <>
-                        <AccordionTrigger>{link.title}</AccordionTrigger>
-                        <AccordionContent>
-                          <ul onClick={handleClose} className={cn("w-full")}>
-                            {link.menu.map((menuItem) => (
-                              <ListItem
-                                key={menuItem.title}
-                                title={menuItem.title}
-                                href={menuItem.href}
-                                icon={menuItem.icon}
-                              >
-                                {menuItem.tagline}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </AccordionContent>
-                      </>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        onClick={handleClose}
-                        className="flex items-center w-full py-4 font-medium text-muted-foreground hover:text-foreground"
-                      >
-                        <span>{link.title}</span>
-                      </Link>
-                    )}
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </ul>
+
+            {/* Navigation */}
+            <Accordion type="single" collapsible className="w-full">
+              {NAV_LINKS.map((link) => (
+                <AccordionItem
+                  key={link.title}
+                  value={link.title}
+                  className="border-b last:border-none no-underline"
+                >
+                  {link.menu ? (
+                    <>
+                      <AccordionTrigger className="text-base no-underline font-medium py-4">
+                        {link.title}
+                      </AccordionTrigger>
+
+                      <AccordionContent className="pb-2 no-underline">
+                        <ul className="flex flex-col gap-2">
+                          {link.menu.map((menuItem) => (
+                            <ListItem
+                              key={menuItem.title}
+                              title={menuItem.title}
+                              href={menuItem.href}
+                              icon={menuItem.icon}
+                              onClick={handleClose}
+                            >
+                              {menuItem.tagline}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={handleClose}
+                      className="block py-4 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  )}
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            {/* Bottom spacing */}
+            <div className="h-6" />
           </div>
         </SheetContent>
       </Sheet>
@@ -106,35 +128,47 @@ const MobileNavbar = () => {
   );
 };
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { title: string; icon: LucideIcon }
->(({ className, title, href, icon: Icon, children, ...props }, ref) => {
+const ListItem = ({
+  className,
+  title,
+  href,
+  icon: Icon,
+  children,
+  onClick,
+  ...props
+}: React.ComponentPropsWithoutRef<"a"> & {
+  title: string;
+  icon: LucideIcon;
+  onClick?: () => void;
+}) => {
   return (
     <li>
       <Link
-        href={href!}
-        ref={ref}
+        href={href ?? "/"}
+        onClick={onClick}
         className={cn(
-          "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+          "group flex items-start gap-3 rounded-lg p-3 transition-all",
+          "hover:bg-accent hover:text-accent-foreground no-underline",
           className,
         )}
         {...props}
       >
-        <div className="flex items-center space-x-2 text-foreground">
-          <Icon className="h-4 w-4" />
-          <h6 className="text-sm !leading-none">{title}</h6>
+        <div className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground group-hover:text-foreground">
+          <Icon className="size-4" />
         </div>
-        <p
-          title={children! as string}
-          className="line-clamp-1 text-sm leading-snug text-muted-foreground"
-        >
-          {children}
-        </p>
+
+        <div className="flex flex-col min-w-0">
+          <span className="text-sm font-medium no-underline! leading-tight wrap-break-word">
+            {title}
+          </span>
+
+          <span className="text-sm text-muted-foreground no-underline! leading-snug line-clamp-2 wrap-break-word">
+            {children}
+          </span>
+        </div>
       </Link>
     </li>
   );
-});
-ListItem.displayName = "ListItem";
+};
 
 export default MobileNavbar;

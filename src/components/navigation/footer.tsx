@@ -1,152 +1,150 @@
-import Link from 'next/link';
-import { AnimationContainer, Icons } from "@/components"
-import { TextHoverEffect } from "@/components/ui/text-hover-effect"
+import Link from "next/link";
+import { AnimationContainer } from "@/components";
+import Grainient from "../ui/granient";
+import {
+  LinkedinLogoIcon,
+  InstagramLogoIcon,
+  FacebookLogoIcon,
+} from "@phosphor-icons/react/ssr";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Image from "next/image";
 
 const Footer = () => {
-    return (
-        <footer className="flex flex-col relative items-center justify-center border-t border-border pt-16 pb-8 md:pb-0 px-6 lg:px-8 w-full max-w-6xl mx-auto lg:pt-32 bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)]">
+  return (
+    <footer className="flex flex-col relative items-center justify-center border-t border-border pt-16 pb-8 px-6 lg:px-8 w-full mx-auto lg:pt-32 bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)] overflow-hidden">
+      {/* Center bar indicator */}
+      <div className="absolute top-0 left-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-1.5 bg-neutral-800 rounded-full z-20"></div>
 
-            <div className="absolute top-0 left-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-1.5 bg-foreground rounded-full"></div>
+      {/* GRAINIENT OVERLAY */}
+      <div className="pointer-events-none absolute inset-0 right-0 w-full overflow-hidden opacity-80 z-0 [mask:radial-gradient(ellipse_80%_100%_at_80%_50%,#000_10%,transparent_100%)]">
+        <Grainient
+          color1="#6b26d9"
+          color2="#f3edfd"
+          color3="#401782"
+          timeSpeed={0.55}
+          colorBalance={-0.07}
+          warpStrength={2.05}
+          warpFrequency={5.6}
+          warpSpeed={0.9}
+          warpAmplitude={73}
+          blendAngle={99}
+          blendSoftness={0.48}
+          rotationAmount={650}
+          noiseScale={1}
+          grainAmount={0.09}
+          grainScale={4.9}
+          grainAnimated={false}
+          contrast={1.55}
+          gamma={0.9}
+          saturation={1.2}
+          centerX={-0.18}
+          centerY={0.04}
+          zoom={0.85}
+        />
+      </div>
 
-            <div className="grid gap-8 xl:grid-cols-3 xl:gap-8 w-full">
+      <div className="flex flex-col items-center w-full z-10">
+        {/* LOGO & TAGLINE */}
+        <AnimationContainer delay={0.1}>
+          <div className="flex flex-col items-center justify-center mb-12">
+            <Image
+              src="/logo_full.png"
+              alt="Rentline Logo"
+              width={220}
+              height={70}
+              className="mix-blend-multiply"
+            />
+          </div>
+        </AnimationContainer>
 
-                <AnimationContainer delay={0.1}>
-                    <div className="flex flex-col items-start justify-start md:max-w-[200px]">
-                        <div className="flex items-start">
-                            <Icons.logo className="w-7 h-7" />
-                        </div>
-                        <p className="text-muted-foreground mt-4 text-sm text-start">
-                            Manage your links with ease.
-                        </p>
-                        <span className="mt-4 text-neutral-200 text-sm flex items-center">
-                            Made by <Link href="https://shreyas-sihasane.vercel.app/" className="font-semibold ml-1">Shreyas</Link>
-                        </span>
-                    </div>
-                </AnimationContainer>
-
-                <div className="grid-cols-2 gap-8 grid mt-16 xl:col-span-2 xl:mt-0">
-                    <div className="md:grid md:grid-cols-2 md:gap-8">
-                        <AnimationContainer delay={0.2}>
-                            <div className="">
-                                <h3 className="text-base font-medium text-white">
-                                    Product
-                                </h3>
-                                <ul className="mt-4 text-sm text-muted-foreground">
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Features
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Pricing
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Testimonials
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Integration
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </AnimationContainer>
-                        <AnimationContainer delay={0.3}>
-                            <div className="mt-10 md:mt-0 flex flex-col">
-                                <h3 className="text-base font-medium text-white">
-                                    Integrations
-                                </h3>
-                                <ul className="mt-4 text-sm text-muted-foreground">
-                                    <li className="">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Facebook
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Instagram
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            Twitter
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            LinkedIn
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </AnimationContainer>
-                    </div>
-                    <div className="md:grid md:grid-cols-2 md:gap-8">
-                        <AnimationContainer delay={0.4}>
-                            <div className="">
-                                <h3 className="text-base font-medium text-white">
-                                    Resources
-                                </h3>
-                                <ul className="mt-4 text-sm text-muted-foreground">
-                                    <li className="mt-2">
-                                        <Link href="/resources/blog" className="hover:text-foreground transition-all duration-300">
-                                            Blog
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="/resources/help" className="hover:text-foreground transition-all duration-300">
-                                            Support
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </AnimationContainer>
-                        <AnimationContainer delay={0.5}>
-                            <div className="mt-10 md:mt-0 flex flex-col">
-                                <h3 className="text-base font-medium text-white">
-                                    Company
-                                </h3>
-                                <ul className="mt-4 text-sm text-muted-foreground">
-                                    <li className="">
-                                        <Link href="" className="hover:text-foreground transition-all duration-300">
-                                            About Us
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="/privacy" className="hover:text-foreground transition-all duration-300">
-                                            Privacy Policy
-                                        </Link>
-                                    </li>
-                                    <li className="mt-2">
-                                        <Link href="/terms" className="hover:text-foreground transition-all duration-300">
-                                            Terms & Conditions
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </AnimationContainer>
-                    </div>
-                </div>
-
+        {/* TIGHT NAVIGATION LINKS */}
+        <AnimationContainer delay={0.2}>
+          {/* Using a flex container with a fixed max-width and 'gap' keeps them close together */}
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-10 md:gap-x-20 pb-16 w-full max-w-3xl border-b border-neutral-200/30">
+            <div className="flex flex-col items-center">
+              <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-widest">
+                Product
+              </h3>
+              <ul className="mt-4 space-y-3 text-center">
+                {["Features", "Pricing"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      href="#"
+                      className="text-sm text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="mt-8 border-t border-border/40 pt-4 md:pt-8 md:flex md:items-center md:justify-between w-full">
-                <AnimationContainer delay={0.6}>
-                    <p className="text-sm text-muted-foreground mt-8 md:mt-0">
-                        &copy; {new Date().getFullYear()} Linkify INC. All rights reserved.
-                    </p>
-                </AnimationContainer>
+            <div className="flex flex-col items-center">
+              <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-widest">
+                Resources
+              </h3>
+              <ul className="mt-4 space-y-3 text-center">
+                {["Blog", "Support", "Guides", "FAQ"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      href="#"
+                      className="text-sm text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="h-[20rem] lg:h-[20rem] hidden md:flex items-center justify-center">
-                <TextHoverEffect text="LINKIFY" />
+            <div className="flex flex-col items-center">
+              <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-widest">
+                Company
+              </h3>
+              <ul className="mt-4 space-y-3 text-center">
+                {["About", "Privacy", "Terms", "Contact"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      href="#"
+                      className="text-sm text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-        </footer>
-    )
-}
+          </div>
+        </AnimationContainer>
+      </div>
 
-export default Footer
+      {/* BOTTOM BAR */}
+      <div className="mt-8 pb-12 flex flex-col md:flex-row items-center justify-between w-full max-w-6xl z-10 gap-6">
+        <div className="flex items-center gap-4 text-sm text-neutral-500 font-medium">
+          <span>&copy; {new Date().getFullYear()} rentline.io.</span>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {[
+            { icon: <LinkedinLogoIcon size={18} />, label: "LinkedIn" },
+            { icon: <InstagramLogoIcon size={18} />, label: "Instagram" },
+            { icon: <FacebookLogoIcon size={18} />, label: "Facebook" },
+          ].map((social, idx) => (
+            <Link
+              key={idx}
+              href="#"
+              className="p-2 bg-neutral-50 border border-neutral-200 rounded-full text-neutral-900 hover:bg-neutral-900 hover:text-white transition-all duration-300"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>{social.icon}</TooltipTrigger>
+                <TooltipContent>Follow us</TooltipContent>
+              </Tooltip>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
